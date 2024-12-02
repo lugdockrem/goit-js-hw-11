@@ -5,14 +5,87 @@
   |============================
 */
 /* Common styles */
-@import url('./reset.css');
+/* @import url('./reset.css');
 @import url('./base.css');
 @import url('./container.css');
-@import url('./animations.css');
+@import url('./animations.css'); */
 
 /* Sections style */
-@import url('./header.css');
+/* @import url('./header.css');
 @import url('./vite-promo.css');
 @import url('./badges.css');
 @import url('./back-link.css');
-@import url('./footer.css');
+@import url('./footer.css'); */
+
+/* #region Image search */
+
+/* Reset стилів для інпуту */
+input {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Основні стилі для форми пошуку */
+.search-container {
+  display: flex;
+  justify-content: center; /* Центрування по горизонталі */
+  align-items: flex-start; /* Вирівнювання по верхньому краю */
+  gap: 8px;
+  margin-top: 20px; /* Відступ зверху, щоб інпут і кнопка не були притиснуті до краю */
+}
+
+/* Стилі для інпуту */
+#search-input {
+  width: 272px; /* Ширина інпуту за макетом */
+  height: 40px; /* Висота інпуту за макетом */
+  border-radius: 4px;
+  border: 1px solid #808080;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* Стан ховера і фокусу */
+#search-input:hover,
+#search-input:focus {
+  border: 1px solid #000; /* Чорний бордер */
+}
+
+/* Стан "pressed" — коли в полі введений текст */
+#search-input:not(:placeholder-shown) {
+  border: 1px solid #4e75ff; /* Синій бордер */
+}
+
+/* Стилі для кнопки */
+#search-button {
+  width: 91px;
+  height: 40px;
+  border-radius: 8px;
+  background: #4e75ff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+}
+
+#search-button:hover,
+#search-button:focus {
+  background: #6c8cff; /* Зміна кольору на ховер */
+}
+
+/* #endregion Image search */
