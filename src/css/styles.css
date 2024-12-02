@@ -15,12 +15,13 @@
 @import url('./vite-promo.css');
 @import url('./badges.css');
 @import url('./back-link.css');
-@import url('./footer.css'); */
+@import url('./footer.css'); */ /* #region Image search */ /* #region Image search */
 
 /* #region Image search */
 
-/* Reset стилів для інпуту */
-input {
+/* Скидання стилів для інпутів та кнопок */
+input,
+button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,106 +30,169 @@ input {
 }
 
 button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
   cursor: pointer;
 }
 
-/* Основні стилі для форми пошуку */
+/* Стилі для контейнера пошуку */
 .search-container {
   display: flex;
-  justify-content: center; /* Центрування по горизонталі */
-  align-items: flex-start; /* Вирівнювання по верхньому краю */
+  justify-content: center;
+  align-items: center;
   gap: 8px;
-  margin-top: 20px; /* Відступ зверху, щоб інпут і кнопка не були притиснуті до краю */
+  margin: 20px 0;
 }
 
-/* Стилі для інпуту */
 #search-input {
-  width: 272px; /* Ширина інпуту за макетом */
-  height: 40px; /* Висота інпуту за макетом */
-  border-radius: 4px;
+  width: 272px;
+  height: 40px;
   border: 1px solid #808080;
+  border-radius: 4px;
   padding: 8px;
   font-size: 14px;
 }
 
-/* Стан ховера і фокусу */
 #search-input:hover,
 #search-input:focus {
-  border: 1px solid #000; /* Чорний бордер */
+  border: 1px solid #000;
 }
 
-/* Стан "pressed" — коли в полі введений текст */
-#search-input:not(:placeholder-shown) {
-  border: 1px solid #4e75ff; /* Синій бордер */
-}
-
-/* Стилі для кнопки */
 #search-button {
   width: 91px;
   height: 40px;
   border-radius: 8px;
-  background: #4e75ff;
+  background-color: #4e75ff;
   color: #fff;
   font-size: 14px;
-  cursor: pointer;
-  border: none;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  align-items: center;
 }
 
 #search-button:hover,
 #search-button:focus {
-  background: #6c8cff; /* Зміна кольору на ховер */
+  background-color: #6c8cff;
 }
 
-/* #endregion Image search */
+/* #endregion */
 
 /* #region Gallery */
 
-/* Галерея */
+/* Контейнер галереї */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, 1fr); /* 5 прев'ю в рядок */
+  gap: 16px; /* Відступи між картками */
   padding: 16px;
   list-style: none;
-  margin: 0;
+  margin: 0 auto; /* Центруємо галерею */
+  max-width: 1800px; /* Максимальна ширина галереї */
 }
 
-/* Елемент картки */
-.gallery-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ddd;
+.gallery a {
+  display: block;
+  width: 100%; /* Ширина прев'ю залежить від колонки */
+  height: auto; /* Висота підлаштовується під ширину */
+  overflow: hidden;
+}
+
+/* Посилання в галереї */
+.gallery__item {
+  display: block;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: #f9f9f9;
+  text-decoration: none;
 }
 
 /* Зображення */
-.gallery-image {
-  max-width: 100%;
-  height: auto;
+.photo-card__image {
   display: block;
+  width: 100%;
+  height: 160px; /* Висота прев’ю */
+  object-fit: cover; /* Зберігає пропорції */
+  border-radius: 8px; /* Повне закруглення */
 }
 
-/* Інформація */
+/* Інформація про зображення */
 .info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 стовпчики */
+  align-items: center;
+  gap: 4px;
   padding: 8px;
-  font-size: 14px;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  height: 40px; /* Приблизно 1/5 висоти прев'ю */
 }
 
 .info-item {
-  margin: 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #555;
+  line-height: 1;
 }
 
-/* #endregion Gallery */
+.info-item b {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+/* Виправлення закруглення зображень */
+.photo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 8px; /* Закруглення всіх кутів */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Відступи між прев'юшками */
+.gallery {
+  padding: 16px;
+  gap: 24px; /* Відступи між картками */
+}
+
+/* Ефекти при наведенні */
+.gallery__item:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+}
+
+.photo-card__image:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Стилі для інфоблока під фото */
+/* Інфоблок під фото */
+.photo-card .info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 рівні стовпчики */
+  gap: 4px; /* Відступи між стовпчиками */
+  font-size: 10px; /* Ще менший текст */
+  color: #555; /* Текст темно-сірого кольору */
+  background-color: #f8f8f8; /* Світлий фон для блоку */
+  padding: 2px; /* Ще менші внутрішні відступи */
+  border-top: 1px solid #ddd; /* Легка лінія відокремлення */
+}
+
+.photo-card .info-item b {
+  display: block;
+  font-weight: bold;
+  color: #333; /* Темніший текст для заголовків */
+  margin-bottom: 1px; /* Мінімальний відступ між заголовком і числом */
+}
+
+.photo-card .info-item {
+  text-align: center; /* Вирівнювання тексту по центру */
+  font-size: 10px; /* Ще менший текст */
+  line-height: 1; /* Компактна висота рядків */
+}
+
+/* #endregion */

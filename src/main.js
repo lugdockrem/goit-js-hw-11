@@ -2,18 +2,28 @@ import { fetchImages } from './js/pixabay-api.js';
 import { renderGallery } from './js/render-functions.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Налаштування iziToast
 iziToast.settings({
-  position: 'topRight', // Встановлюємо позицію в правому верхньому куті
-  timeout: 5000, // Час автоматичного закриття (5 секунд)
-  transitionIn: 'fadeIn', // Ефект появи
-  transitionOut: 'fadeOut', // Ефект зникання
-  progressBar: true, // Показати індикатор прогресу
+  position: 'topRight',
+  timeout: 5000,
+  transitionIn: 'fadeIn',
+  transitionOut: 'fadeOut',
+  progressBar: true,
 });
 
+// Елементи інтерфейсу
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
+const gallery = document.querySelector('.gallery'); // Галерея для зображень
+
+// Ініціалізація SimpleLightbox
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 // Обробник для кнопки "Search"
 searchButton.addEventListener('click', onSearch);
@@ -49,7 +59,9 @@ function onSearch() {
           backgroundColor: '#FF4E4E',
         });
       } else {
+        gallery.innerHTML = ''; // Очищення галереї перед новим пошуком
         renderGallery(images); // Рендеринг галереї
+        lightbox.refresh(); // Оновлення SimpleLightbox після додавання нових зображень
       }
     })
     .catch(error => {
