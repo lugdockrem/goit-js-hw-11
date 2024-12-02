@@ -89,3 +89,46 @@ button {
 }
 
 /* #endregion Image search */
+
+/* #region Gallery */
+
+/* Галерея */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  list-style: none;
+  margin: 0;
+}
+
+/* Елемент картки */
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Зображення */
+.gallery-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Інформація */
+.info {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.info-item {
+  margin: 4px 0;
+}
+
+/* #endregion Gallery */

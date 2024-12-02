@@ -1,4 +1,5 @@
 import { fetchImages } from './js/pixabay-api.js';
+import { renderGallery } from './js/render-functions.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -11,24 +12,33 @@ iziToast.settings({
   progressBar: true, // Показати індикатор прогресу
 });
 
-// Елементи DOM
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 
-// Функція для пошуку зображень
-function handleSearch() {
+// Обробник для кнопки "Search"
+searchButton.addEventListener('click', onSearch);
+
+// Додавання пошуку за клавішею Enter
+searchInput.addEventListener('keypress', event => {
+  if (event.key === 'Enter') {
+    onSearch();
+  }
+});
+
+// Функція обробки пошуку
+function onSearch() {
   const query = searchInput.value.trim();
 
   if (!query) {
     iziToast.error({
-      title: 'Error',
-      message: 'Please enter a search term!',
+      title: 'Input Error',
+      message: 'Please enter a search query.',
+      backgroundColor: '#FF4E4E',
     });
     return;
   }
 
-  searchInput.value = ''; // Очищення інпуту
-
+  // Виконуємо запит на отримання зображень
   fetchImages(query)
     .then(images => {
       if (images.length === 0) {
@@ -36,11 +46,10 @@ function handleSearch() {
           title: 'No Results',
           message:
             'Sorry, there are no images matching your <br>search query. Please try again!',
-          backgroundColor: '#FF4E4E', // Червоний фон
+          backgroundColor: '#FF4E4E',
         });
       } else {
-        console.log('Images found:', images);
-        // TODO: Додати рендеринг зображень у галереї
+        renderGallery(images); // Рендеринг галереї
       }
     })
     .catch(error => {
@@ -49,15 +58,8 @@ function handleSearch() {
         message: 'Something went wrong. Please try again later!',
       });
       console.error('Error fetching images:', error);
+    })
+    .finally(() => {
+      searchInput.value = ''; // Очищення інпуту після завершення пошуку
     });
 }
-
-// Обробник кліку на кнопку
-searchButton.addEventListener('click', handleSearch);
-
-// Обробник натискання клавіші "Enter" в інпуті
-searchInput.addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    handleSearch();
-  }
-});
