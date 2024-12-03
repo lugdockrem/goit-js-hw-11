@@ -5,19 +5,29 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// Налаштування iziToast
+// Налаштування iziToast з позиціонуванням
 iziToast.settings({
-  position: 'topRight',
+  position: 'topRight', // Початкове позиціонування
   timeout: 5000,
   transitionIn: 'fadeIn',
   transitionOut: 'fadeOut',
   progressBar: true,
+  customClass: { toast: 'toast-top-right' }, // Додаткове кастомне позиціонування
 });
 
 // Елементи інтерфейсу
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 const gallery = document.querySelector('.gallery'); // Галерея для зображень
+
+// Створення або використання індикатора завантаження
+let loadingIndicator = document.querySelector('#loading-indicator');
+if (!loadingIndicator) {
+  loadingIndicator = document.createElement('div');
+  loadingIndicator.id = 'loading-indicator';
+  loadingIndicator.textContent = 'Loading images, please wait...';
+  document.body.appendChild(loadingIndicator);
+}
 
 // Ініціалізація SimpleLightbox
 let lightbox = new SimpleLightbox('.gallery a', {
@@ -48,6 +58,9 @@ function onSearch() {
     return;
   }
 
+  // Показуємо індикатор завантаження
+  loadingIndicator.style.display = 'block';
+
   // Виконуємо запит на отримання зображень
   fetchImages(query)
     .then(images => {
@@ -72,6 +85,7 @@ function onSearch() {
       console.error('Error fetching images:', error);
     })
     .finally(() => {
+      loadingIndicator.style.display = 'none'; // Приховуємо індикатор після завершення
       searchInput.value = ''; // Очищення інпуту після завершення пошуку
     });
 }

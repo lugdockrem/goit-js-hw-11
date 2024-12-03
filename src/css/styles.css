@@ -73,12 +73,26 @@ button {
   background-color: #6c8cff;
 }
 
+#loading-indicator {
+  display: none; /* Приховуємо за замовчуванням */
+  position: absolute;
+  top: 80px; /* Відступ від верхнього краю екрану, 32px нижче за інпут з кнопкою */
+  left: 50%;
+  transform: translateX(-50%); /* Центруємо індикатор по горизонталі */
+  font: 400 16px / 1.5 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  text-align: center;
+  z-index: 100; /* Для того, щоб індикатор був поверх інших елементів */
+}
+
 /* #endregion */
 
 /* #region Gallery */
 
 /* Контейнер галереї */
 .gallery {
+  margin-top: 100px; /* Відступ від інпуту та індикатора */
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 прев'ю в рядок */
   gap: 16px; /* Відступи між картками */
@@ -124,7 +138,7 @@ button {
   padding: 8px;
   background-color: #ffffff;
   border-top: 1px solid #ddd;
-  height: 40px; /* Приблизно 1/5 висоти прев'ю */
+  height: 29px; /* Приблизно 1/5 висоти прев'ю */
 }
 
 .info-item {
@@ -195,4 +209,17 @@ button {
   line-height: 1; /* Компактна висота рядків */
 }
 
-/* #endregion */
+/* Стилі для індикатора завантаження */
+/*.loading-indicator {
+  /*display: none; /* Спочатку прихований */
+/*position: absolute;
+  /*top: calc(100% + 32px); /* Відстань 32px від інпуту */
+/* left: 50%;
+  transform: translateX(-50%);
+  font: 400 16px / 1.5 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  text-align: center;
+} */
+
+/* #endregion Gallery */
