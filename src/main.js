@@ -22,11 +22,13 @@ const gallery = document.querySelector('.gallery'); // Галерея для з�
 
 // Створення або використання індикатора завантаження
 let loadingIndicator = document.querySelector('#loading-indicator');
+console.log(loadingIndicator); // Перевірка наявності елемента в DOM
 if (!loadingIndicator) {
   loadingIndicator = document.createElement('div');
   loadingIndicator.id = 'loading-indicator';
-  loadingIndicator.textContent = 'Loading images, please wait...';
+  loadingIndicator.className = 'loader loader-spinner'; // Використання бібліотеки css-loader
   document.body.appendChild(loadingIndicator);
+  console.log(loadingIndicator); // Перевірка наявності індикатора в DOM
 }
 
 // Ініціалізація SimpleLightbox
@@ -35,15 +37,20 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-// Обробник для кнопки "Search"
-searchButton.addEventListener('click', onSearch);
-
 // Додавання пошуку за клавішею Enter
 searchInput.addEventListener('keypress', event => {
   if (event.key === 'Enter') {
     onSearch();
   }
 });
+
+// Обробник для кнопки "Search"
+searchButton.addEventListener('click', onSearch);
+
+// Функція штучної затримки
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // Функція обробки пошуку
 function onSearch() {
@@ -64,6 +71,7 @@ function onSearch() {
   // Виконуємо запит на отримання зображень
   fetchImages(query)
     .then(images => {
+      // Видаляємо штучну затримку
       if (images.length === 0) {
         iziToast.error({
           title: 'No Results',

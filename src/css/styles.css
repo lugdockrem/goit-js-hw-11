@@ -74,16 +74,11 @@ button {
 }
 
 #loading-indicator {
-  display: none; /* Приховуємо за замовчуванням */
   position: absolute;
-  top: 80px; /* Відступ від верхнього краю екрану, 32px нижче за інпут з кнопкою */
+  top: calc(100% + 32px);
   left: 50%;
-  transform: translateX(-50%); /* Центруємо індикатор по горизонталі */
-  font: 400 16px / 1.5 'Montserrat', sans-serif;
-  letter-spacing: 0.04em;
-  color: #2e2f42;
-  text-align: center;
-  z-index: 100; /* Для того, щоб індикатор був поверх інших елементів */
+  transform: translateX(-50%);
+  z-index: 100;
 }
 
 /* #endregion */
