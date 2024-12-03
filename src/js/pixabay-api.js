@@ -17,5 +17,5 @@ export async function fetchImages(query) {
   }
 
   const data = await response.json();
-  return data.hits; // Масив зображень у відповіді
+  return data.hits;
 }
